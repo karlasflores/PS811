@@ -1,0 +1,42 @@
+---
+title: "CV"
+author: "Karla Flores"
+date: "9/17/2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Karla Sophia Flores
+
+1059 Bascom Mall, Madison WI 53705
+
+ksflores@wisc.edu
+
+Education:
+
+University of Wisconsin-Madison, Ph.D in Political Science 2021-Present
+
+University of California, Los Angeles B.A. in Political Science 2017-2021
+
+Research Experience:
+
+Research Assistant for Eric Min, UCLA
+
+National Security Council Group-Decision Making Project, January 2020-August 2020
+
+Wartime Negotiation Project, September 2020-December 2020
+
+Felowship:
+
+Univeristy Graduate School Fellowship 
+
+Language:
+
+English
+
+Spanish
