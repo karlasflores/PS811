@@ -1,0 +1,61 @@
+---
+name: Karla
+surname: Flores
+position: "Political Science Ph.D Student"
+address: "North Hall, 1050 Bascom Mall, Madison, WI 53706"
+phone: +1 (310) 594-9233
+www: github.com/karlasflores
+email: "ksflores@wisc.edu"
+github: karlasflores
+linkedin: karla-flores-7226b71bb
+date: "`r format(Sys.time(), '%B %Y')`"
+output: vitae::hyndman
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+# Education
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Ph.D in Political Science", "2021-Present", "University of Wisconsin, Madison", "Madison, WI",
+  "B.A. in Political Science", "2017-2021", "University of California, Los Angeles", "Los Angeles, CA",
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+# Research
+
+```{r}
+tribble(
+  ~Year, ~Type, ~Desc,
+  "Jan - Aug 2020", "Eric Min", "National Security Council Group-Decision Making Project",
+) %>% 
+  brief_entries(
+    glue::glue("Research Assistant for {Type}"),
+    Year, 
+    Desc
+  )
+```
+
+# Fellowship
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, 
+  "University Graduate School Fellowship", "2021", 
+) %>% 
+  detailed_entries(Degree, Year)
+```
+
+# Languages
+\
+ - **English** \
+ - **Spanish**
+ 
