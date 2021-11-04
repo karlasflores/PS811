@@ -1,0 +1,166 @@
+---
+title: "Excercise 5 - PS811"
+author: "Karla Flores"
+date: "10/29/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+```
+
+## R Markdown
+
+##BaseR
+
+```{r}
+
+read.csv("food_coded.csv")
+```
+
+```{r}
+
+foodcode <- read.csv("food_coded.csv")
+
+
+```
+
+```{r}
+
+#Exract the first 95 rows
+
+foodcode [1:95,]
+
+foodcodeextraction <- foodcode [1:95,]
+
+
+```
+
+```{r}
+#Index of food- GPA, Calories_Chicken, Drink, Fav_Cuisine, Father_Profession, Mother_Profession  
+
+colnames(foodcode)
+indexoffood <- foodcodeextraction[,c(1, 4, 16, 26, 25, 45)]
+head(indexoffood)
+
+
+```
+```{r}
+
+#New Variable for Healthy Each Person Feels 
+foodcode$healthyfeeling
+foodcode.new <- foodcode
+foodcode.new$health_feel_100 <- (foodcode$healthy_feeling)*10
+head(foodcode.new$health_feel_100)
+```
+
+#Filter to students who are female and have gpas that are above 3.0
+```{r}
+
+#Filter to students who are female and have gpas that are above 3.0
+class(foodcode.new)
+gpafemale <- foodcode.new[foodcode.new$Gender=="1" & foodcode.new$GPA > 3.0,]
+```
+
+```{r}
+
+#Find the Mean and Standard Deviation for Chicken, Tortilla, Turkey, Waffle 
+
+colnames(foodcode.new)
+indexoffood2 <- foodcode.new[,c(4, 55, 56, 60)]
+colnames(indexoffood2)
+?sapply
+mean2 <- sapply(indexoffood2, mean, na.rm = T) #find mean of indexed food
+stdev <- sapply(indexoffood2, sd, na.rm = T) #find sd of indexed food
+calories <- rbind(mean2, stdev)
+head(calories)
+```
+
+
+```{r}
+
+#Summarize gpa with weight within the gender and cuisine variables
+
+foodcode$weight <- as.numeric(foodcode$weight)
+foodcode$GPA <- as.numeric(foodcode$GPA)
+foodcodewomen <- foodcode[foodcode$Gender == 1,]
+foodcodemen <- foodcode[foodcode$Gender == 2,]
+womenGPAmean <- tapply(foodcodewomen$GPA, foodcodewomen$cuisine, mean, na.rm=T)
+menGPAmean <- tapply(foodcodemen$GPA, foodcodemen$cuisine, mean, na.rm=T)
+womenGPAsd <- tapply(foodcodewomen$GPA, foodcodewomen$cuisine, sd, na.rm = T)
+menGPAsd <- tapply(foodcodemen$GPA, foodcodemen$cuisine, sd, na.rm = T)
+womenweightmean <- tapply(foodcodewomen$weight, foodcodewomen$cuisine, mean, na.rm = T)
+menweightmean <- tapply(foodcodemen$weight, foodcodemen$cuisine, mean, na.rm = T)
+womenweightsd <- tapply(foodcodewomen$weight, foodcodewomen$cuisine, sd, na.rm = T)
+menweightsd <- tapply(foodcodemen$weight, foodcodemen$cuisine, sd, na.rm = T)
+
+```
+
+##Tidyverse
+
+```{r}
+library(tidyverse)
+
+read_csv("facebook-fact-check.csv")
+facebookcode <- read_csv("facebook-fact-check.csv")
+
+```
+```{r}
+
+#Extract the Last 500 Rows
+
+facebookcode %>% slice_tail(n = 500)
+
+```
+```{r}
+
+#The Even-Numbered Column Indices and Identify them by Name
+
+row_odd <- seq_len(nrow(facebookcode)) %% 2 
+datarowodd <- facebookcode[row_odd == 1, ]
+colnames(datarowodd)
+
+```
+
+```{r}
+
+#Create New Variable Using Mutate and Renames
+
+facebookcode <- facebookcode %>% 
+  mutate(post_type_coded = ifelse("Post Type" == 'link', '1',
+                                  ifelse("Post Type" == 'photo', '2', 
+                                         ifelse("Post Type" == 'text', '3','4'))))
+
+```
+
+```{r}
+
+#Arrange Page Names in Reverse Order 
+
+facebookcode %>% arrange(desc(Page))
+
+```
+```{r}
+
+#Find the Mean and Standard Deviation of: share_count, reaction_count, comment_count
+
+facebookcode %>% 
+  summarize(share_count = mean(share_count, na.rm=T),
+            reaction_count = mean(reaction_count, na.rm=T),
+            comment_count = mean(comment_count, na.rm=T))
+
+
+```
+```{r}
+#Summarize the Mean and Standard Deviation of the Question Above
+
+facebookcode %>% 
+  filter(Category == "mainstream") %>% 
+  summarize(across(c(share_count, reaction_count, comment_count), 
+                   list(mean = mean, sd = sd), na.rm = T)) 
+
+```
+
+
