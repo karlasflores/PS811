@@ -1,0 +1,111 @@
+---
+title: 'Exercise 5: Functions and Loops'
+author: "Karla Flores"
+date: "10/28/2020"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("/Users/karlaflores/Desktop/sample-folder")
+
+read.csv("national.csv")
+national  <- read.csv("national.csv")
+
+```
+
+
+# Functions
+
+```{r}
+
+#Create a function for the mean, median, and standard deviation.
+#Mean 
+
+mean <- function(x) {
+  return(mean(x))
+}
+
+#As was noted in class, return is not necessary
+#Using the function example shown in class
+
+```
+
+
+```{r}
+
+#Median 
+
+medianie <- function(x) {
+  return(median(x))
+}
+
+```
+
+
+
+```{r}
+#Standard Deviation 
+
+sd <- function(x) {
+  return(sd(x))
+}
+
+```
+
+
+```{r}
+
+#Create a function that finds the mean and excludes the lowest and highest value
+
+nationaldata <- function(x) {
+  s <- sort(x)
+  subx <-  s[-c(1, length(s))]
+  return(subx)
+}
+
+```
+
+
+```{r}
+# Apply the functions to the Christianity variables
+
+nationaldata(national$christianity_all)
+
+```
+
+```{r}
+#Write a function that lists all the unique years with more than 300,000 Christians in total
+funthree <- function(d,x,y){
+  funq <- as.data.frame(d[x>300000, y]) 
+  unq <- unique(f) 
+  return(u) 
+}
+
+#As discussed in class, return is not necessary 
+
+
+```
+
+# Loops/apply
+
+```{r}
+#Write a loop to find how many variables there are per observation
+
+```
+
+```{r}
+
+#Write a loop to find the mean number of Protestant Christians in each country (i.e., the state column). Then use an apply family function to do the same
+
+```
+
+```{r}
+#Check the column type for each variable
+
+```
+
